@@ -5,21 +5,26 @@ import java.util.InputMismatchException;
 public class DiceGame {
     public static void main(String[] args) {
 
-        try {
-            System.out.println("How many dice would you like to roll?");
-            Scanner scan = new Scanner(System.in);
-            int numberOfDice = scan.nextInt();
-            System.out.println("About to roll " + numberOfDice + " dice");
+        Scanner scan = new Scanner(System.in);
+        boolean appCompleted = false;
 
-            Random random = new Random();
-            for (int i = 0; i < numberOfDice; i++) {
-                int die = random.nextInt(6)+1;
-                System.out.println(display(die));
+        do{
+
+            try {
+                System.out.println("How many dice would you like to roll?");
+                int numberOfDice = scan.nextInt();
+                System.out.println("About to roll " + numberOfDice + " dice");
+
+                Random random = new Random();
+                for (int i = 0; i < numberOfDice; i++) {
+                    int die = random.nextInt(6)+1;
+                    System.out.println(display(die));
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Please enter a valid number");
+                scan.next();
             }
-        }catch (InputMismatchException e){
-            System.out.println("Please enter a valid number");
-        }
-
+        }while (!appCompleted);
     }
 
     public static String display(int value){
